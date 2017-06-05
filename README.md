@@ -2,6 +2,8 @@
 
 ### Microservice API para validação das inscrições estaduais do Brasil
 
+Validações implementadas de acordo com o [manual do Sintegra](http://www.sintegra.gov.br/insc_est.html).
+
 ## Exemplo de utilização
 Para utilizar esta API você precisa ter o [Docker](https://www.docker.com) instalado.
 
