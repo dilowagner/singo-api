@@ -6,11 +6,10 @@ RUN mkdir -p /go/src/github.com/dilowagner/singo-api
 COPY . /go/src/github.com/dilowagner/singo-api 
 WORKDIR /go/src/github.com/dilowagner/singo-api
 
-RUN export GIN_MODE=release
-ENV PORT 8080
-
 RUN go-wrapper download
 RUN go-wrapper install
+
+ENV PORT 8080
 
 RUN go build -o main . 
 

@@ -1,53 +1,14 @@
-# Singo IE Validation - Golang
+# Microservice API Singo IE Validation - Golang
 
-### Biblioteca para validação das inscrições dos estados brasileiros.
-
-## Instalando
-Para utilizar no seu projeto basta executar o seguinte comando
-
-```go
-  go get github.com/dilowagner/singo-ie-validation
-```
+### Server API para validação das inscrições estaduais do Brasil
 
 ## Exemplo de utilização
+Para utilizar esta API você precisa ter o [Docker](https://www.docker.com) instalado.
 
-
-```go
-package main
-
-import (
-	"fmt"
-
-	singo "github.com/dilowagner/singo-ie-validation"
-)
-
-func main() {
-
-	validator := singo.NewIEValidator()
-
-	validator.IE = " 251.040.852" // SC - Valido
-	validator.UF = "SC"
-
-	result, err := validator.Validate()
-	if err != nil {
-		panic(err.Error)
-	}
-
-	if result {
-		fmt.Println("Valido")
-	} else {
-		fmt.Println("Invalido")
-	}
-}
-
+```shell
+  docker build --rm -t singo-server .
 ```
 
-## Executando os testes
-Basta clonar o projeto e rodar o comando:
-
-```go
-  go test
+```shell
+  docker run -p 8080:8080 --name="singo" singo-server
 ```
-
-## Contribua
-**ATENÇÃO: Esta biblioteca está em fase de desenvolvimento, falta a validação de alguns estados**

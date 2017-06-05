@@ -22,7 +22,7 @@ func Validate(uf, insc string) (bool, error) {
 
 func main() {
 
-	//gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	port := os.Getenv("PORT")
 
