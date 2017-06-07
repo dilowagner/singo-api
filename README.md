@@ -32,6 +32,8 @@ Para utilizar a validação, acesse a rota http://localhost:8080/singo/:uf/:insc
 
 EX: [http://localhost:8080/singo/BA/12345663](http://localhost:8080/singo/BA/12345663) - validando a inscrição do estado da Bahia
 
+## Adicionais
+
 Caso você precise parar o container
 ```shell
   docker stop <CONTAINER-ID>
