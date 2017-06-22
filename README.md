@@ -7,30 +7,17 @@ Validações implementadas de acordo com o [manual do Sintegra](http://www.sinte
 ## Exemplo de utilização
 Para utilizar esta API você precisa ter o [Docker](https://www.docker.com) instalado.
 
-- Clone o projeto
-```shell
-  git clone https://github.com/dilowagner/singo-api.git
-```
-
-- Acesse a pasta do projeto
-```shell
-  cd /path/singo-api
-```
-
-- Rode o build.
-```shell
-  docker build --rm -t singo-server .
-```
-
 - Rode o serviço na porta 8080
 ```shell
-  docker run -p 8080:8080 --name="singo" -d singo-server
+  docker run -p 8080:8080 --name="singo" -d dilowagner/singo-api
 ```
 **Pronto!** Basta acessar o browser e digitar o endereço [http://localhost:8080](http://localhost:8080), você receberá a mensagem "API para validacao de inscrições estaduais".
 
 Para utilizar a validação, acesse a rota http://localhost:8080/singo/:uf/:inscricao - passando o estado e a inscrição estadual.
 
 EX: [http://localhost:8080/singo/BA/12345663](http://localhost:8080/singo/BA/12345663) - validando a inscrição do estado da Bahia
+
+## Adicionais
 
 Caso você precise parar o container
 ```shell
