@@ -6,7 +6,7 @@ import (
 
 	singo "github.com/dilowagner/singo-ie-validation"
 
-	"gopkg.in/gin-gonic/gin.v1"
+	"github.com/gin-gonic/gin"
 )
 
 // Validate function
@@ -14,7 +14,8 @@ import (
 func Validate(uf, insc string) (bool, error) {
 
 	validator := singo.NewIEValidator()
-	validator.UF = uf
+	enumUF := validator.GetEnumUF(uf)
+	validator.UF = enumUF
 	validator.IE = insc
 
 	return validator.Validate()

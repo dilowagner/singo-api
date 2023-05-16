@@ -1,21 +1,36 @@
-FROM golang:1.8
+#####################################
+#   STEP 1 build executable binary  #
+#####################################
+FROM golang:1.18.2-alpine AS builder
 
-MAINTAINER "Diego Wagner" <diegowagner4@gmail.com>
+# Install git.
+# Git is required for fetching the dependencies.
+RUN apk update && apk add --no-cache git && apk add -U --no-cache ca-certificates
 
-COPY . /go/src/github.com/dilowagner/singo-api 
-WORKDIR /go/src/github.com/dilowagner/singo-api
+WORKDIR /app
 
-RUN groupadd -r singo && useradd --no-log-init -r -g singo singo && \
-    mkdir -p /go/src/github.com/dilowagner/singo-api && \
-    chown -R singo:singo /go && \
-    go-wrapper download && \
-    go-wrapper install && \
-    go build -o main . 
+COPY go.mod .
+COPY go.sum .
+
+RUN go mod download
+
+COPY . .
+
+# Build the binary.
+RUN CGO_ENABLED=0 GOOS=linux go build -o main
+
+#####################################
+#   STEP 2 build a small image      #
+#####################################
+FROM scratch
+
+# Copy our static executable.
+COPY --from=builder /app/main /app/main
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 ENV PORT 8080
 
-USER singo
-
-ENTRYPOINT /go/bin/singo-api
+# Run the hello binary.
+ENTRYPOINT ["/app/main"]
 
 EXPOSE 8080
